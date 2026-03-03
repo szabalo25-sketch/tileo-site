@@ -1,0 +1,660 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>Tileo — Condimentos en tubos</title>
+  <meta name="description" content="Tileo: condimentos ricos para cocina casera diaria. Bases de madera hechas a mano + tubos listos para usar."/>
+  <meta name="theme-color" content="#070707"/>
+
+  <style>
+    :root{
+      --bg:#070707;
+      --bg2:#0c0c0c;
+      --text:#f3f0ea;
+      --muted:#bdb7ad;
+      --copper:#b87333;
+      --copper2:#d08a3f;
+      --border:#ffffff14;
+      --card:rgba(255,255,255,.04);
+      --shadow: 0 20px 70px rgba(0,0,0,.6);
+      --radius: 22px;
+      --max: 1120px;
+    }
+    *{box-sizing:border-box}
+    html{scroll-behavior:smooth}
+    body{
+      margin:0;
+      font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Noto Sans", sans-serif;
+      color:var(--text);
+      background:
+        radial-gradient(1200px 800px at 15% 10%, rgba(184,115,51,.18), transparent 60%),
+        radial-gradient(900px 700px at 85% 25%, rgba(208,138,63,.10), transparent 55%),
+        linear-gradient(180deg, var(--bg), var(--bg2) 55%, var(--bg));
+      overflow-x:hidden;
+    }
+    a{color:inherit;text-decoration:none}
+    .wrap{width:min(var(--max), calc(100% - 40px)); margin:0 auto}
+
+    /* Header */
+    header{
+      position:fixed; inset:0 0 auto 0;
+      z-index:60;
+      backdrop-filter: blur(10px);
+      background: linear-gradient(180deg, rgba(0,0,0,.60), rgba(0,0,0,.20));
+      border-bottom:1px solid var(--border);
+    }
+    .nav{
+      display:flex; align-items:center; justify-content:space-between;
+      gap:14px; padding:14px 0;
+    }
+    .brand{display:flex; align-items:center; gap:12px; min-width:190px}
+    .mark{
+      width:36px; height:36px; border-radius:14px;
+      display:grid; place-items:center;
+      background: linear-gradient(135deg, rgba(184,115,51,.85), rgba(208,138,63,.55));
+      color:#160b03;
+      font-weight:900;
+      border:1px solid rgba(255,255,255,.06);
+      box-shadow: 0 18px 60px rgba(0,0,0,.55);
+      letter-spacing:.4px;
+    }
+    .brand b{letter-spacing:.7px}
+    .brand small{display:block; color:var(--muted); margin-top:2px; font-size:12px}
+
+    nav.links{display:flex; gap:18px; align-items:center}
+    nav.links a{
+      color:var(--muted);
+      font-size:12px;
+      letter-spacing:1px;
+      text-transform:uppercase;
+      padding:8px 10px;
+      border-radius:12px;
+      border:1px solid transparent;
+    }
+    nav.links a:hover{color:var(--text); background:rgba(255,255,255,.03); border-color:var(--border)}
+
+    .btn{
+      border:1px solid var(--border);
+      background:rgba(255,255,255,.03);
+      color:var(--text);
+      padding:10px 14px;
+      border-radius:14px;
+      font-weight:650;
+      letter-spacing:.3px;
+      cursor:pointer;
+      display:inline-flex; align-items:center; gap:10px;
+      transition: transform .15s ease, background .15s ease, border-color .15s ease, filter .15s ease;
+      user-select:none;
+      white-space:nowrap;
+    }
+    .btn:hover{transform:translateY(-1px); background:rgba(255,255,255,.06); border-color:rgba(184,115,51,.35)}
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(184,115,51,.95), rgba(208,138,63,.92));
+      color:#140a04; border-color:transparent;
+    }
+    .btn.primary:hover{filter:brightness(1.05)}
+
+    /* Hero */
+    .hero{
+      min-height:100svh;
+      padding-top:74px;
+      position:relative;
+      display:grid;
+      align-items:end;
+    }
+    .heroMedia{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 500px at 20% 25%, rgba(184,115,51,.18), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.15), rgba(0,0,0,.86)),
+        url("assets/hero.jpg") center/cover no-repeat;
+      transform: scale(1.02);
+      filter: saturate(1.08) contrast(1.05);
+    }
+    .heroContent{
+      position:relative;
+      padding: 86px 0 56px;
+    }
+    .kicker{
+      display:flex; gap:10px; flex-wrap:wrap; align-items:center;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:1px;
+      font-size:12px;
+    }
+    .pill{
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.25);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    h1{
+      margin:14px 0 10px;
+      font-size: clamp(44px, 6.5vw, 86px);
+      line-height:.95;
+      letter-spacing:-1.2px;
+      text-shadow: 0 30px 90px rgba(0,0,0,.65);
+    }
+    .sub{
+      max-width: 62ch;
+      color:#e8e3db;
+      opacity:.92;
+      font-size: clamp(15px, 1.55vw, 18px);
+      line-height:1.6;
+    }
+    .heroActions{
+      display:flex; gap:12px; flex-wrap:wrap; align-items:center;
+      margin-top:22px;
+    }
+    .scrollHint{
+      margin-top:34px;
+      display:flex; align-items:center; gap:12px;
+      color:var(--muted);
+      text-transform:uppercase;
+      letter-spacing:.9px;
+      font-size:12px;
+    }
+    .mouse{
+      width:26px; height:40px;
+      border:1px solid var(--border);
+      border-radius:999px;
+      position:relative;
+      opacity:.9;
+    }
+    .mouse::after{
+      content:"";
+      width:4px; height:8px;
+      background: rgba(255,255,255,.55);
+      border-radius:99px;
+      position:absolute; left:50%; top:8px;
+      transform:translateX(-50%);
+      animation: wheel 1.4s infinite ease-in-out;
+    }
+    @keyframes wheel{
+      0%{opacity:.2; transform:translate(-50%,0)}
+      35%{opacity:1}
+      100%{opacity:.1; transform:translate(-50%,14px)}
+    }
+
+    /* Sections */
+    section{padding:74px 0; position:relative}
+    .sectionTitle{
+      display:flex; justify-content:space-between; align-items:flex-end;
+      gap:18px; flex-wrap:wrap;
+      margin-bottom:18px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size: clamp(24px, 3.2vw, 42px);
+      letter-spacing:-.6px;
+    }
+    .sectionTitle p{margin:0; color:var(--muted); max-width:72ch; line-height:1.55}
+
+    .grid{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:16px;
+    }
+    .card{
+      grid-column: span 6;
+      min-height:260px;
+      border:1px solid var(--border);
+      background: linear-gradient(180deg, rgba(255,255,255,.05), rgba(255,255,255,.02));
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow:hidden;
+      position:relative;
+    }
+    .card.big{grid-column:span 12; min-height:340px}
+    .bgimg{
+      position:absolute; inset:0;
+      background:
+        radial-gradient(900px 550px at 20% 30%, rgba(184,115,51,.16), transparent 60%),
+        linear-gradient(180deg, rgba(0,0,0,.10), rgba(0,0,0,.84)),
+        var(--img) center/cover no-repeat;
+      filter:saturate(1.06) contrast(1.05);
+      transform:scale(1.03);
+    }
+    .inner{
+      position:relative; z-index:1;
+      padding:22px;
+      display:flex; flex-direction:column; gap:10px;
+    }
+    .tag{
+      display:inline-flex; align-items:center; gap:8px;
+      width:fit-content;
+      font-size:12px;
+      letter-spacing:.9px;
+      text-transform:uppercase;
+      color:var(--muted);
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.20);
+      padding:6px 10px;
+      border-radius:999px;
+    }
+    .card h3{margin:0; font-size:22px; letter-spacing:-.35px}
+    .card p{margin:0; color:#e8e3db; opacity:.88; line-height:1.55; max-width:72ch}
+
+    /* Flavors */
+    .flavors{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:16px;
+    }
+    .flavorGroup{
+      grid-column: span 6;
+      border:1px solid var(--border);
+      background: rgba(255,255,255,.03);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      padding:18px;
+    }
+    .flavorGroup h3{
+      margin:0 0 10px;
+      display:flex; align-items:center; justify-content:space-between; gap:10px;
+      font-size:18px; letter-spacing:-.2px;
+    }
+    .flavorGroup h3 span{color:var(--muted); font-weight:600; font-size:12px; letter-spacing:1px; text-transform:uppercase}
+    .chips{display:flex; flex-wrap:wrap; gap:10px}
+    .chip{
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.18);
+      border-radius: 999px;
+      padding:8px 10px;
+      font-size:13px;
+      color:#e8e3db;
+    }
+
+    /* Gallery strips */
+    .gallery{
+      display:grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap:16px;
+    }
+    .shot{
+      grid-column: span 4;
+      height: 320px;
+      border-radius: var(--radius);
+      border:1px solid var(--border);
+      overflow:hidden;
+      box-shadow: var(--shadow);
+      position:relative;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,.08), rgba(0,0,0,.82)),
+        var(--img) center/cover no-repeat;
+      transform: translateZ(0);
+    }
+    .shot.wide{grid-column:span 12; height: 380px}
+    .shot .label{
+      position:absolute; left:18px; bottom:18px;
+      padding:8px 10px;
+      border-radius: 999px;
+      border:1px solid var(--border);
+      background: rgba(0,0,0,.30);
+      color: #efeae2;
+      font-size:12px;
+      letter-spacing:1px;
+      text-transform:uppercase;
+    }
+
+    /* Final CTA */
+    .final{padding: 92px 0}
+    .finalBox{
+      border:1px solid rgba(184,115,51,.30);
+      background:
+        radial-gradient(900px 450px at 15% 10%, rgba(184,115,51,.20), transparent 60%),
+        linear-gradient(180deg, rgba(255,255,255,.06), rgba(255,255,255,.02));
+      border-radius: calc(var(--radius) + 6px);
+      box-shadow: var(--shadow);
+      padding: 28px;
+      display:flex; justify-content:space-between; align-items:center;
+      gap:16px; flex-wrap:wrap;
+    }
+    .finalBox h3{margin:0; font-size:28px; letter-spacing:-.4px}
+    .finalBox p{margin:6px 0 0; color:var(--muted); max-width:72ch; line-height:1.55}
+
+    footer{
+      padding: 36px 0 64px;
+      color: var(--muted);
+      border-top:1px solid var(--border);
+      background: rgba(0,0,0,.16);
+    }
+    .foot{
+      display:flex; justify-content:space-between; align-items:center;
+      gap:12px; flex-wrap:wrap;
+      font-size: 13px;
+    }
+
+    /* Floating WhatsApp */
+    .waFloat{
+      position:fixed;
+      right:16px; bottom:16px;
+      z-index:80;
+      display:flex; align-items:center; gap:10px;
+    }
+    .waBubble{
+      border:1px solid rgba(184,115,51,.30);
+      background: rgba(0,0,0,.45);
+      backdrop-filter: blur(10px);
+      color: var(--text);
+      padding:10px 12px;
+      border-radius: 999px;
+      box-shadow: var(--shadow);
+      font-size: 13px;
+      max-width: 220px;
+    }
+    .waBtn{
+      width:54px; height:54px;
+      border-radius: 18px;
+      border:1px solid rgba(184,115,51,.35);
+      background: linear-gradient(135deg, rgba(184,115,51,.95), rgba(208,138,63,.92));
+      box-shadow: var(--shadow);
+      display:grid; place-items:center;
+      color:#140a04;
+      cursor:pointer;
+      transition: transform .15s ease, filter .15s ease;
+      user-select:none;
+    }
+    .waBtn:hover{transform:translateY(-2px); filter:brightness(1.05)}
+    .waIcon{
+      width:22px; height:22px; display:block;
+    }
+
+    /* Reveal animations */
+    .reveal{opacity:0; transform: translateY(14px); transition: opacity .7s ease, transform .7s ease}
+    .reveal.on{opacity:1; transform: translateY(0)}
+    .delay1{transition-delay:.08s}
+    .delay2{transition-delay:.16s}
+    .delay3{transition-delay:.24s}
+
+    @media (max-width: 920px){
+      nav.links{display:none}
+      .card{grid-column: span 12}
+      .flavorGroup{grid-column: span 12}
+      .shot{grid-column: span 12; height: 320px}
+      .shot.wide{height: 320px}
+      .waBubble{display:none}
+    }
+  </style>
+</head>
+
+<body>
+  <header>
+    <div class="wrap nav">
+      <a class="brand" href="#top" aria-label="Tileo Home">
+        <div class="mark">T</div>
+        <div>
+          <b>TILEO</b>
+          <small>Condimentos en tubos • cocina diaria</small>
+        </div>
+      </a>
+
+      <nav class="links" aria-label="Secciones">
+        <a href="#proceso">Proceso</a>
+        <a href="#sabores">Sabores</a>
+        <a href="#galeria">Galería</a>
+        <a href="#comprar">Comprar</a>
+      </nav>
+
+      <div style="display:flex; gap:10px; align-items:center">
+        <a class="btn" href="#sabores">Ver sabores</a>
+        <a class="btn primary" id="buyTop" href="#">Comprar</a>
+      </div>
+    </div>
+  </header>
+
+  <main id="top">
+    <!-- HERO -->
+    <section class="hero" aria-label="Hero">
+      <div class="heroMedia" role="img" aria-label="Tileo hero"></div>
+      <div class="wrap heroContent">
+        <div class="kicker reveal on">
+          <span class="pill">HECHO A MANO</span>
+          <span class="pill">MADERA + TUBOS</span>
+          <span class="pill">LISTO PARA USAR</span>
+        </div>
+
+        <h1 class="reveal on delay1">Tileo.</h1>
+        <p class="sub reveal on delay2">
+          El sabor empieza antes de la cocina: bases de madera trabajadas a mano y tubos llenados uno por uno.
+          Condimentos reales, ordenados y listos para darle sazón a todo.
+        </p>
+
+        <div class="heroActions reveal on delay3">
+          <a class="btn primary" id="buyHero" href="#">Comprar por WhatsApp</a>
+          <a class="btn" href="https://www.instagram.com/tileo.mercedes/" target="_blank" rel="noreferrer">Ver Instagram</a>
+        </div>
+
+        <div class="scrollHint reveal on delay3">
+          <div class="mouse" aria-hidden="true"></div>
+          <span>Deslizá para ver más</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- PROCESO -->
+    <section id="proceso">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2 class="reveal">Proceso artesanal</h2>
+          <p class="reveal delay1">
+            De la madera al estante. Sin atajos: corte, perforado, lijado, barniz, llenado manual, etiqueta y cierre.
+          </p>
+        </div>
+
+        <div class="grid">
+          <article class="card big reveal">
+            <div class="bgimg" style="--img:url('assets/perforado.jpg');"></div>
+            <div class="inner">
+              <span class="tag">1 · MADERA</span>
+              <h3>Corte y perforado con moldes</h3>
+              <p>Elegimos la madera, la cortamos y perforamos con precisión para que cada tubo encaje perfecto.</p>
+              <div style="display:flex; gap:10px; flex-wrap:wrap; margin-top:8px">
+                <a class="btn" href="#galeria">Ver galería</a>
+                <a class="btn primary" href="#comprar">Quiero uno</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="card reveal delay1">
+            <div class="bgimg" style="--img:url('assets/bases_lote.jpg');"></div>
+            <div class="inner">
+              <span class="tag">2 · TERMINACIÓN</span>
+              <h3>Lijado y barniz a mano</h3>
+              <p>Terminación prolija, tacto suave y presencia real en tu cocina.</p>
+            </div>
+          </article>
+
+          <article class="card reveal delay2">
+            <div class="bgimg" style="--img:url('assets/tubos_en_base.jpg');"></div>
+            <div class="inner">
+              <span class="tag">3 · LLENADO</span>
+              <h3>Tubos llenados uno por uno</h3>
+              <p>Corcho, pesado, etiqueta y cinta de cierre para una presentación impecable.</p>
+            </div>
+          </article>
+
+          <article class="card big reveal delay2">
+            <div class="bgimg" style="--img:url('assets/almacen.jpg');"></div>
+            <div class="inner">
+              <span class="tag">4 · CUIDADO</span>
+              <h3>Almacenamiento para mantener aroma</h3>
+              <p>Separados por modelo, en lugar fresco y oscuro para cuidar la calidad.</p>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- SABORES -->
+    <section id="sabores">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2 class="reveal">Sabores disponibles</h2>
+          <p class="reveal delay1">Elegí tus condimentos y armá tu base Tileo.</p>
+        </div>
+
+        <div class="flavors">
+          <div class="flavorGroup reveal">
+            <h3>🌿 Hierbas <span>4</span></h3>
+            <div class="chips">
+              <div class="chip">Romero</div>
+              <div class="chip">Tomillo</div>
+              <div class="chip">Orégano</div>
+              <div class="chip">Perejil</div>
+            </div>
+          </div>
+
+          <div class="flavorGroup reveal delay1">
+            <h3>🧄 Ajos y cebollas <span>5</span></h3>
+            <div class="chips">
+              <div class="chip">Ajo granulado</div>
+              <div class="chip">Ajo granulado ahumado</div>
+              <div class="chip">Ajo en polvo</div>
+              <div class="chip">Cebolla en escamas</div>
+              <div class="chip">Cebolla en escamas ahumada</div>
+            </div>
+          </div>
+
+          <div class="flavorGroup reveal delay2">
+            <h3>🌶 Picantes y pimentones <span>7</span></h3>
+            <div class="chips">
+              <div class="chip">Ají cayena</div>
+              <div class="chip">Ají molido</div>
+              <div class="chip">Ají molido merkén</div>
+              <div class="chip">Pimentón dulce</div>
+              <div class="chip">Pimentón ahumado</div>
+              <div class="chip">Paprika</div>
+              <div class="chip">Pimiento granulado</div>
+            </div>
+          </div>
+
+          <div class="flavorGroup reveal delay3">
+            <h3>🟡 Especias <span>5</span></h3>
+            <div class="chips">
+              <div class="chip">Cúrcuma</div>
+              <div class="chip">Jengibre</div>
+              <div class="chip">Pimienta blanca</div>
+              <div class="chip">Pimienta negra</div>
+              <div class="chip">Nuez moscada</div>
+            </div>
+          </div>
+        </div>
+
+        <div style="margin-top:18px; display:flex; gap:12px; flex-wrap:wrap" class="reveal">
+          <a class="btn primary" id="buyFlavors" href="#">Armar mi base por WhatsApp</a>
+          <a class="btn" href="https://www.instagram.com/tileo.mercedes/" target="_blank" rel="noreferrer">Ver más fotos</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- GALERÍA -->
+    <section id="galeria">
+      <div class="wrap">
+        <div class="sectionTitle">
+          <h2 class="reveal">Galería</h2>
+          <p class="reveal delay1">Minimalismo, orden y sabor. Hecho en Mercedes.</p>
+        </div>
+
+        <div class="gallery">
+          <div class="shot wide reveal" style="--img:url('assets/lote_mesa.jpg');">
+            <div class="label">Producción real</div>
+          </div>
+          <div class="shot reveal" style="--img:url('assets/close_pimenton.jpg');">
+            <div class="label">Pimentón ahumado</div>
+          </div>
+          <div class="shot reveal delay1" style="--img:url('assets/close_curcuma.jpg');">
+            <div class="label">Cúrcuma</div>
+          </div>
+          <div class="shot reveal delay2" style="--img:url('assets/top_tapones.jpg');">
+            <div class="label">Orden Tileo</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA FINAL -->
+    <section id="comprar" class="final">
+      <div class="wrap">
+        <div class="finalBox reveal">
+          <div>
+            <h3>¿Listo para que tu cocina se vea diferente?</h3>
+            <p>
+              Escribinos por WhatsApp, te pasamos opciones y armás tu base con los condimentos que más usás.
+            </p>
+          </div>
+          <div style="display:flex; gap:10px; flex-wrap:wrap">
+            <a class="btn" href="https://www.instagram.com/tileo.mercedes/" target="_blank" rel="noreferrer">Instagram</a>
+            <a class="btn primary" id="buyFinal" href="#">Comprar ahora</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <div class="wrap foot">
+        <div>© <span id="year"></span> Tileo</div>
+        <div style="display:flex; gap:14px; flex-wrap:wrap">
+          <a href="#top">Arriba</a>
+          <a href="#proceso">Proceso</a>
+          <a href="#sabores">Sabores</a>
+          <a href="#comprar">Comprar</a>
+        </div>
+      </div>
+    </footer>
+  </main>
+
+  <!-- Floating WhatsApp -->
+  <div class="waFloat" aria-label="WhatsApp Tileo">
+    <div class="waBubble">¿Armamos tu base Tileo? 👇</div>
+    <a class="waBtn" id="waFloat" href="#" aria-label="Comprar por WhatsApp">
+      <!-- icon -->
+      <svg class="waIcon" viewBox="0 0 32 32" fill="none" aria-hidden="true">
+        <path d="M16 3C9.1 3 3.5 8.3 3.5 14.8c0 2.2.7 4.3 2 6.1L4 29l8.3-1.4c1.1.3 2.4.5 3.7.5 6.9 0 12.5-5.3 12.5-11.8S22.9 3 16 3Z" stroke="#140a04" stroke-width="2"/>
+        <path d="M12.7 10.6c-.3-.6-.6-.6-1-.6h-.8c-.3 0-.7.1-1 .5-.4.4-1.4 1.3-1.4 3.1s1.5 3.6 1.7 3.9c.2.3 2.9 4.6 7.1 6.3 3.5 1.4 4.2 1.1 5 .9.8-.2 2.5-1 2.8-2 .4-1 .4-1.9.3-2.1-.1-.2-.3-.3-.7-.5s-2.5-1.3-2.9-1.4c-.4-.2-.7-.2-1 .2-.3.4-1.1 1.4-1.4 1.7-.3.3-.5.3-.9.1-.4-.2-1.8-.7-3.4-2.2-1.3-1.2-2.1-2.6-2.4-3-.2-.4 0-.6.2-.8.2-.2.4-.5.6-.7.2-.2.3-.4.4-.6.1-.2.1-.5 0-.7-.1-.2-.9-2.4-1.2-3Z" fill="#140a04"/>
+      </svg>
+    </a>
+  </div>
+
+  <script>
+    // WhatsApp config (tu número)
+    const WA_NUMBER = "5491126461540";
+    const WA_TEXT = encodeURIComponent("Hola! Quiero armar una base Tileo. ¿Me pasás opciones y precios?");
+    const WA_LINK = `https://wa.me/${WA_NUMBER}?text=${WA_TEXT}`;
+
+    // Set links
+    ["buyTop","buyHero","buyFlavors","buyFinal","waFloat"].forEach(id=>{
+      const el = document.getElementById(id);
+      if(el) el.href = WA_LINK;
+    });
+
+    // Year
+    document.getElementById("year").textContent = new Date().getFullYear();
+
+    // Reveal on scroll
+    const items = document.querySelectorAll(".reveal");
+    const io = new IntersectionObserver((entries)=>{
+      entries.forEach(e=>{
+        if(e.isIntersecting) e.target.classList.add("on");
+      });
+    }, {threshold: 0.12});
+    items.forEach(i=>{
+      if(!i.classList.contains("on")) io.observe(i);
+    });
+
+    // Gentle hero zoom effect
+    const heroMedia = document.querySelector(".heroMedia");
+    let t = 0;
+    function tick(){
+      t += 0.0035;
+      if(heroMedia){
+        const s = 1.02 + Math.sin(t) * 0.008;
+        heroMedia.style.transform = `scale(${s})`;
+      }
+      requestAnimationFrame(tick);
+    }
+    tick();
+  </script>
+</body>
+</html>
